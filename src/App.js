@@ -13,12 +13,12 @@ import {
 import { BlendFunction } from "postprocessing";
 
 
-// import { Boxes } from "./Boxes";
+import { Boxes } from "./Boxes";
 import { Car } from "./Car";
 import { Ground } from "./Ground";
-// import { FloatingGrid } from "./FloatingGrid";
 import { Rings } from "./Rings";
 import './style.css'
+// import { FloatingGrid } from './FloatingGrid';
 
 function CarShow() {
   return (
@@ -40,6 +40,10 @@ function CarShow() {
       </CubeCamera>
 
       <Rings />
+      <Boxes />
+      {/* <FloatingGrid /> */}
+      <Ground />
+
 
       <spotLight
         color={[1, 0.25, 0.7]}
@@ -59,7 +63,23 @@ function CarShow() {
         castShadow
         shadow-bias={-0.0001}
       />
-      <Ground />
+
+      <EffectComposer>
+        {/* <DepthOfField focusDistance={0.035} focalLength={0.1} bokehScale={1} height={480} /> */}
+        <Bloom
+          blendFunction={BlendFunction.ADD}
+          intensity={0.7} // The bloom intensity.
+          width={300} // render width
+          height={300} // render height
+          kernelSize={5} // blur kernel size
+          luminanceThreshold={0.15} // luminance threshold. Raise this value to mask out darker elements in the scene.
+          luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
+        />
+        <ChromaticAberration
+          blendFunction={BlendFunction.NORMAL} // blend mode
+          offset={[0.0005, 0.0012]} // color offset
+        />
+      </EffectComposer>
     </>
   )
 }
