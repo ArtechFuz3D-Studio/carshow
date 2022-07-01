@@ -6,7 +6,7 @@ import {
 } from '@react-three/drei'
 import {
   EffectComposer,
-  DepthOfField,
+
   Bloom,
   ChromaticAberration,
 } from "@react-three/postprocessing";
